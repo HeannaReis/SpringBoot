@@ -1,15 +1,12 @@
 package dio.myFirstWebApi.model;
+
+import dio.myFirstWebApi.hendler.BusinessException;
+
 public class User {
     private int id;
     private String login;
     private String password;
     public User(String login, String password) {
-        if (login == null || login.isEmpty()) {
-            throw new IllegalArgumentException("Login cannot be null");
-        }
-        if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be null");
-        }
         this.login = login;
         this.password = password;
     }

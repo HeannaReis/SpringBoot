@@ -1,4 +1,6 @@
 package dio.myFirstWebApi.repository;
+import dio.myFirstWebApi.hendler.BusinessException;
+import dio.myFirstWebApi.hendler.RequiredFieldException;
 import dio.myFirstWebApi.model.User;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
@@ -6,12 +8,20 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
+    private void validateUserFields(User user) {
+        if (user.getLogin() == null || user.getLogin().isEmpty())
+            throw new RequiredFieldException("login");
+
+        if (user.getPassword() == null || user.getPassword().isEmpty())
+            throw new RequiredFieldException("password");
+    }
     public void save(User user) {
+        validateUserFields(user);
         System.out.println("SAVE - Receiving the user in the repository layer");
         System.out.println(user);
     }
-
     public void update(User user) {
+        validateUserFields(user);
         System.out.println("UPDATE - Receiving the user in the repository layer");
         System.out.println(user);
     }
